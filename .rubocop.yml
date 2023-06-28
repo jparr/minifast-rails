@@ -1,0 +1,46 @@
+require:
+  - standard
+  - rubocop-rspec
+  - rubocop-rails
+  - rubocop-i18n
+  - rubocop-capybara
+  - rubocop-factory_bot
+
+inherit_gem:
+  standard: config/base.yml
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/schema.rb
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+  ConsistentQuotesInMultiline: false
+
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+Rails/Present:
+  Exclude:
+    - bin/*
+
+RSpec/NestedGroups:
+  Exclude:
+    - spec/requests/**/*.rb
+
+RSpec/ExampleLength:
+  Exclude:
+    - spec/system/**/*.rb
+
+I18n/RailsI18n:
+  Enabled: true
+  Exclude:
+    - bin/*
+    - db/*
+    - spec/**/*
+
+I18n/GetText:
+  Enabled: false

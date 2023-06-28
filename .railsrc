@@ -1,0 +1,4 @@
+--skip-bundle
+--skip-test
+--database=postgresql
+--skip-jbuilder
