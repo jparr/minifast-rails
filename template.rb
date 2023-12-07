@@ -59,7 +59,7 @@ end
 
 gem_group :test do
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'cuprite'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'webdrivers'
 end
@@ -70,8 +70,11 @@ gem 'hotwire-livereload'
 after_bundle do
   generate 'rspec:install'
   directory 'spec/support'
+  uncomment_lines 'spec/rails_helper.rb', /'spec', 'support', '\*\*', '\*.rb'/
+
   copy_file '.erb-lint.yml'
   copy_file '.rubocop.yml'
+  copy_file 'README_template.md', 'README.md'
 
   run 'bundle binstubs erb_lint'
   run 'bundle binstubs rubocop'
@@ -81,6 +84,7 @@ after_bundle do
 
   inject_into_file 'config/application.rb', after: 'config.load_defaults 7.0' do
     <<-RUBY
+
     config.view_component.generate.sidecar = true
 
     config.generators do |generator|
@@ -102,7 +106,7 @@ after_bundle do
 
   # todo: better readme template
 
-  run 'bin/rubocop -A'
+  run 'bin/rubocop -a'
 
   say 'App successfully created!', :green
 end
